@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../Hooks/useAuth/useAuth';
 
 const Header = () => {
+	const { user, logOut } = useAuth();
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="light" variant="light" sticky="top">
 			<Container>
@@ -31,17 +33,7 @@ const Header = () => {
 					>
 						Order Place
 					</Nav.Link>
-					<Nav.Link
-						as={NavLink}
-						className="text-decoration-none mx-2 text-black"
-						activeStyle={{
-							fontWeight: 'bold',
-							color: 'cyan'
-						}}
-						to="/Login"
-					>
-						Login
-					</Nav.Link>
+
 					<Nav.Link
 						as={NavLink}
 						className="text-decoration-none mx-2 text-black"
@@ -53,6 +45,27 @@ const Header = () => {
 					>
 						Manage Order
 					</Nav.Link>
+
+					{user.email ? (
+						<Navbar.Text>
+							<h6 className="d-inline-block text-dark me-2">{user.displayName}</h6>
+							<button onClick={logOut} className="btn btn-primary">
+								Log out
+							</button>
+						</Navbar.Text>
+					) : (
+						<Nav.Link
+							as={NavLink}
+							className="text-decoration-none mx-2 text-black"
+							activeStyle={{
+								fontWeight: 'bold',
+								color: 'cyan'
+							}}
+							to="/Login"
+						>
+							Login
+						</Nav.Link>
+					)}
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
@@ -60,3 +73,16 @@ const Header = () => {
 };
 
 export default Header;
+/* 
+{user.displayName ? (
+						<Navbar.Text>
+							<a href="#login">{user.displayName}</a>
+							<button onClick={logOut} className="btn btn-primary">
+								Log out
+							</button>
+						</Navbar.Text>
+					) : (
+						''
+					)}
+
+*/
