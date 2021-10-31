@@ -45,6 +45,17 @@ const Header = () => {
 					>
 						Manage Order
 					</Nav.Link>
+					<Nav.Link
+						as={NavLink}
+						className="text-decoration-none mx-2 text-black"
+						activeStyle={{
+							fontWeight: 'bold',
+							color: 'tomato'
+						}}
+						to="/add"
+					>
+						Add Tour Spot
+					</Nav.Link>
 
 					{user.email ? (
 						<Navbar.Text>

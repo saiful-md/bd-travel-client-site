@@ -19,13 +19,14 @@ const useFirebase = () => {
 	const googleProvider = new GoogleAuthProvider();
 	const auth = getAuth();
 	const googleSingIn = () => {
-		setIsLoading(true);
-		signInWithPopup(auth, googleProvider)
-			.then((result) => {
-				setUser(result.user);
-				console.log(result.user);
-			})
-			.finally(() => setIsLoading(false));
+		// setIsLoading(true);
+		return signInWithPopup(auth, googleProvider);
+		// .then((result) => {
+		// 	console.log(result);
+		// 	setUser(result.user);
+		// 	setIsLoading(false);
+		// })
+		// .finally(() => setIsLoading(false));
 	};
 
 	useEffect(() => {
@@ -46,9 +47,12 @@ const useFirebase = () => {
 
 	return {
 		user,
+
 		error,
 		isLoading,
+		setUser,
 		googleSingIn,
+		setIsLoading,
 		logOut
 	};
 };

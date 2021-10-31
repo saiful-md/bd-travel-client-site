@@ -13,14 +13,34 @@ const Booking = () => {
 	] = useState([]);
 	useEffect(
 		() => {
-			fetch(`http://localhost:5000/user/${id}`).then((res) => res.json()).then((data) => setBookedSpot(data));
+			fetch(`http://localhost:5000/allTickets/${id}`)
+				.then((res) => res.json())
+				.then((data) => setBookedSpot(data));
 		},
 		[
 			id
 		]
 	);
-	const { register, handleSubmit } = useForm();
-	const onSubmit = (data) => console.log(data);
+
+	const { register, handleSubmit, reset } = useForm();
+	const onSubmit = (data) => {
+		console.log(data);
+		fetch('http://localhost:5000/spacificUser', {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				if (data) {
+					alert('Booked successfully!');
+				}
+			});
+		reset();
+	};
 	return (
 		<div className="mx-5">
 			<h1 className="text-center mb-4">Booked travel ticked</h1>
@@ -47,6 +67,7 @@ const Booking = () => {
 							<input className="w-50 p-1" {...register('email')} placeholder="Email address" /> <br />
 							<input className="w-50 mt-4 p-1" {...register('titleName')} placeholder="Title Name" />{' '}
 							<br />
+							<input className="w-50 mt-4 p-1" {...register('address')} placeholder="Address" /> <br />
 							<input
 								className="w-50 my-4 p-2"
 								{...register('description')}

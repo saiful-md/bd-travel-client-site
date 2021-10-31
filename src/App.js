@@ -11,6 +11,7 @@ import AuthProvider from './Components/Context/AuthProvider';
 import Footer from './Components/Footer/Footer';
 import Booking from './Components/Booking/Booking';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import NotFound from './Components/NotFound/NotFound';
 
 function App() {
 	return (
@@ -28,17 +29,20 @@ function App() {
 						<PrivateRoute exact path="/booking/:id">
 							<Booking />
 						</PrivateRoute>
-						<Route exact path="/orderPlace">
+						<PrivateRoute exact path="/orderPlace">
 							<OrderPlace />
-						</Route>
+						</PrivateRoute>
 						<Route exact path="/login">
 							<Login />
 						</Route>
-						<Route exact path="/add">
+						<PrivateRoute exact path="/add">
 							<Add />
-						</Route>
-						<Route exact path="/manageOrder">
+						</PrivateRoute>
+						<PrivateRoute exact path="/manageOrder">
 							<ManageOrder />
+						</PrivateRoute>
+						<Route exact pat="*">
+							<NotFound />
 						</Route>
 					</Switch>
 					<Footer />

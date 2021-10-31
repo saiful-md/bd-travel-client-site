@@ -1,33 +1,28 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 
 const Add = () => {
-	const nameRef = useRef();
-	const passRef = useRef();
-	const handleForm = (e) => {
-		const name = nameRef.current.value;
-		const password = passRef.current.value;
-		const user = { name, password };
-		console.log(user);
-		fetch('http://localhost:5000/user', {
+	const { register, handleSubmit, reset } = useForm();
+	const onSubmit = (data) => {
+		fetch('http://localhost:5000/allTickets', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(user)
+			body: JSON.stringify(data)
 		}).then();
-
-		// useEffect(() => {
-		// 	fetch('http://localhost:5000/user');
-		// }, []);
-		e.preventDefault();
+		console.log(data);
 	};
 
 	return (
-		<div>
-			<form onClick={handleForm}>
-				<input type="text" ref={nameRef} name="" id="" placeholder="name" />
-				<input type="password" ref={passRef} name="" id="" placeholder="pass" />
-				<input type="submit" value="submit" />
+		<div className="my-5">
+			<h1 className="text-center">Add a tour sopt</h1>
+			<form className="text-center" onSubmit={handleSubmit(onSubmit)}>
+				<input className="w-50 my-4 p-1" {...register('name')} placeholder="name" />
+				<br />
+				<input className="w-50 p-1" {...register('img')} placeholder="image url" /> <br />
+				<textarea className="w-50 mt-4 p-1" {...register('description')} placeholder="Description" /> <br />
+				<input className="w-50 mt-4 p-2 bg-primary rounded-pill border-0 " type="submit" />
 			</form>
 		</div>
 	);

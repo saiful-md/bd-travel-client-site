@@ -1,35 +1,62 @@
 import React, { useEffect, useState } from 'react';
+import { Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router';
+import useAuth from '../Hooks/useAuth/useAuth';
+import './OrderPlace.css'
 
 const OrderPlace = () => {
-	const { id } = useParams();
+	const { user } = useAuth();
+	// console.log(user);
 	const [
-		tour,
-		setTour
-	] = useState([]);
-
+		spacificUser,
+		setSpacificUser
+	] = useState();
 	useEffect(
 		() => {
-			fetch(`http://localhost:5000/user/${id}`).then((res) => res.json()).then((data) => setTour(data));
+			fetch('http://localhost:5000/spacificUSer').then((res) => res.json()).then((data) => {
+				const result = data.filter((userTicket) => userTicket.email === user.email);
+				setSpacificUser(result);
+				console.log(result);
+			});
 		},
 		[
-			id
+			user.email
 		]
 	);
-
-	useEffect(() => {
-		fetch('http://localhost:5000/user/newBooking', {
-			method: 'POST',
-			headers: {
-				'Content-type': 'application/json'
-			},
-			body: JSON.stringify(tour)
-		}).then();
-	}, []);
-
+		const handleDelete = (id) =>{
+			console.log(id);
+			fetch(`http://localhost:5000/spacificUSer/${id}`, {
+				method:"DELETE",
+			}).then(res => res.json()).then(data => {
+				const deleteConfirmation = window.confirm('Are you sure to delete your ticket')
+				if(data.deletedCount > 0){
+					alert("Deleted Successfully");
+					const remainingSpacificUser = spacificUser.filter(remaining => remaining._id !== id);
+					setSpacificUser(remainingSpacificUser)
+				}
+			})
+		}
 	return (
-		<div>
-			<h1>this is order place .{tour.name}</h1>
+		<div className="text-center my-5 mx-3">
+			<h1>this is order place. </h1>
+			<h4>You Booked {spacificUser?.length} Ticket </h4>
+			<Row className="mt-4 mx-3 text-start ">
+				{spacificUser?.map((bookingInfo) => (
+					
+						<Col xs={12} lg={3} className="border p-3 mx-2 booking-single-ticket">
+							<div>
+								<h5 className="text-start">Booked {bookingInfo?.titleName} Ticket</h5>
+								<p>Your email : {bookingInfo?.email}</p>
+								<address>Address: {bookingInfo?.address}</address>
+								<p>{bookingInfo?.description}</p>
+								<p>Phone number: {bookingInfo?.PhoneNumber}</p>
+								<button onClick={()=>handleDelete(bookingInfo?._id)}  className="btn btn-danger">Delete</button>
+							</div>
+							
+						</Col>
+					
+				))}
+			</Row>
 		</div>
 	);
 };
