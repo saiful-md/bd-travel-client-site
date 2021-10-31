@@ -1,27 +1,28 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth/useAuth';
 
 import './Login.css';
 
 const Login = () => {
 	const { googleSingIn, setUser, setIsLoading } = useAuth();
-	const location = useLocation();
-	const history = useHistory();
+	let location = useLocation();
+	let history = useHistory();
 	const url = location.state?.from || '/home';
+	console.log(history, url)
 
-	// const handleGoogleSignIn = () =>{
-	// 	googleSingIn.then((result) => {
-	// 		console.log(result)
-	// 		setUser(result.user);
-	// 		history.push(url)
+	const handleGoogleSignIn = () =>{
+		googleSingIn()
+		.then((result) => {
+			console.log(result)
+			setUser(result.user);
+			history.push(url)
 
-	// 	})
-	// 	// console.log(googleSingIn)
-	// 	// .finally(() => setIsLoading(false))
-	// };
-		// console.log(googleSingIn.then())
+		})
+		.catch((error) => console.log(error.message))
+	};
+		
 	
 	return (
 		<Row className="border w-50 border-success mx-auto p-3 my-5 login-container">
@@ -30,7 +31,7 @@ const Login = () => {
 					login With <span className="text-danger">G</span>oogle
 				</h3>
 				<div className="mt-5">
-					<button onClick={googleSingIn} className="border-0 px-5 py-2 rounded-pill">
+					<button onClick={handleGoogleSignIn} className="border-0 px-5 py-2 rounded-pill">
 						<i className="fab fa-google text-primary" />
 					</button>
 				</div>

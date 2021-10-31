@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, ToggleButtonGroup } from 'react-bootstrap';
 
 const ManageOrder = () => {
 	const [
@@ -14,8 +14,8 @@ const ManageOrder = () => {
 	}, []);
 
 	const handleDelete = (id) => {
-		console.log(id);
-		fetch(`https://damp-dusk-75961.herokuapp.com/${id}`, {
+		// console.log(id);
+		fetch(`https://damp-dusk-75961.herokuapp.com/spacificUSer/${id}`, {
 			method: 'DELETE'
 		})
 			.then((res) => res.json())
@@ -32,30 +32,39 @@ const ManageOrder = () => {
 	return (
 		<div className="m-5">
 			<h1>Manage all Booking Ticket user</h1>
-			<Table striped bordered hover>
-				<thead>
-					<tr>
-						<th>UserName</th>
-						<th>Email</th>
-						<th>Booking Title</th>
-						<th>Booking Delete</th>
-					</tr>
-				</thead>
-				<tbody>
-					{manageOrder.map((user) => (
+			{manageOrder.length === 0 ? (
+				<div class="d-flex justify-content-center">
+					<div class="spinner-border" role="status">
+						<span class="visually-hidden">Loading...</span>
+					</div>
+				</div>
+			) : (
+				<Table striped bordered hover>
+					<thead>
 						<tr>
-							<td>{user.userName}</td>
-							<td>{user.email}</td>
-							<td>{user.titleName}</td>
-							<td className="d-flex justify-content-between flex-column">
-								<button onClick={() => handleDelete(user._id)} className="btn btn-danger mb-3">
-									DELETE
-								</button>
-							</td>
+							<th>UserName</th>
+							<th>Email</th>
+							<th>Booking Title</th>
+							<th>Booking Delete</th>
 						</tr>
-					))}
-				</tbody>
-			</Table>
+					</thead>
+
+					<tbody>
+						{manageOrder.map((user) => (
+							<tr>
+								<td>{user.userName}</td>
+								<td>{user.email}</td>
+								<td>{user.titleName}</td>
+								<td className="d-flex justify-content-between flex-column">
+									<button onClick={() => handleDelete(user._id)} className="btn btn-danger mb-3">
+										DELETE
+									</button>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</Table>
+			)}
 		</div>
 	);
 };
