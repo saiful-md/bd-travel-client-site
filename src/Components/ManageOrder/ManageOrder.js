@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
-import { set } from 'react-hook-form';
 
 const ManageOrder = () => {
 	const [
@@ -8,7 +7,7 @@ const ManageOrder = () => {
 		setManageOrder
 	] = useState([]);
 	useEffect(() => {
-		fetch('http://localhost:5000/spacificUSer').then((res) => res.json()).then((data) => {
+		fetch('https://damp-dusk-75961.herokuapp.com/spacificUSer').then((res) => res.json()).then((data) => {
 			console.log(data);
 			setManageOrder(data);
 		});
@@ -16,7 +15,7 @@ const ManageOrder = () => {
 
 	const handleDelete = (id) => {
 		console.log(id);
-		fetch(`http://localhost:5000/spacificUSer/${id}`, {
+		fetch(`https://damp-dusk-75961.herokuapp.com/${id}`, {
 			method: 'DELETE'
 		})
 			.then((res) => res.json())
@@ -29,6 +28,7 @@ const ManageOrder = () => {
 				}
 			});
 	};
+
 	return (
 		<div className="m-5">
 			<h1>Manage all Booking Ticket user</h1>
@@ -47,8 +47,8 @@ const ManageOrder = () => {
 							<td>{user.userName}</td>
 							<td>{user.email}</td>
 							<td>{user.titleName}</td>
-							<td>
-								<button onClick={() => handleDelete(user._id)} className="btn btn-danger">
+							<td className="d-flex justify-content-between flex-column">
+								<button onClick={() => handleDelete(user._id)} className="btn btn-danger mb-3">
 									DELETE
 								</button>
 							</td>

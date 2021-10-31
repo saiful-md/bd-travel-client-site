@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
 import useAuth from '../Hooks/useAuth/useAuth';
-import useFirebase from '../Hooks/useFirebase/useFirebase';
+
 import './Login.css';
 
 const Login = () => {
@@ -11,16 +11,16 @@ const Login = () => {
 	const history = useHistory();
 	const url = location.state?.from || '/home';
 
-	const handleGoogleSignIn = () =>{
-		googleSingIn.then((result) => {
-			console.log(result)
-			setUser(result.user);
-			history.push(url)
+	// const handleGoogleSignIn = () =>{
+	// 	googleSingIn.then((result) => {
+	// 		console.log(result)
+	// 		setUser(result.user);
+	// 		history.push(url)
 
-		})
-		// console.log(googleSingIn)
-		// .finally(() => setIsLoading(false))
-	};
+	// 	})
+	// 	// console.log(googleSingIn)
+	// 	// .finally(() => setIsLoading(false))
+	// };
 		// console.log(googleSingIn.then())
 	
 	return (
@@ -30,7 +30,7 @@ const Login = () => {
 					login With <span className="text-danger">G</span>oogle
 				</h3>
 				<div className="mt-5">
-					<button onClick={handleGoogleSignIn} className="border-0 px-5 py-2 rounded-pill">
+					<button onClick={googleSingIn} className="border-0 px-5 py-2 rounded-pill">
 						<i className="fab fa-google text-primary" />
 					</button>
 				</div>

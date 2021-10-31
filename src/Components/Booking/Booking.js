@@ -13,7 +13,7 @@ const Booking = () => {
 	] = useState([]);
 	useEffect(
 		() => {
-			fetch(`http://localhost:5000/allTickets/${id}`)
+			fetch(`https://damp-dusk-75961.herokuapp.com/allTickets/${id}`)
 				.then((res) => res.json())
 				.then((data) => setBookedSpot(data));
 		},
@@ -25,7 +25,7 @@ const Booking = () => {
 	const { register, handleSubmit, reset } = useForm();
 	const onSubmit = (data) => {
 		console.log(data);
-		fetch('http://localhost:5000/spacificUser', {
+		fetch('https://damp-dusk-75961.herokuapp.com/spacificUser', {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json'

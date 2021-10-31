@@ -1,12 +1,11 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useRef } from 'react';
+
 import { useForm } from 'react-hook-form';
 
 const Add = () => {
 	const { register, handleSubmit, reset } = useForm();
 	const onSubmit = (data) => {
-		fetch('http://localhost:5000/allTickets', {
+		fetch('https://damp-dusk-75961.herokuapp.com/allTickets', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(data)

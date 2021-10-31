@@ -13,7 +13,7 @@ const OrderPlace = () => {
 	] = useState();
 	useEffect(
 		() => {
-			fetch('http://localhost:5000/spacificUSer').then((res) => res.json()).then((data) => {
+			fetch('https://damp-dusk-75961.herokuapp.com/spacificUSer').then((res) => res.json()).then((data) => {
 				const result = data.filter((userTicket) => userTicket.email === user.email);
 				setSpacificUser(result);
 				console.log(result);
@@ -25,7 +25,7 @@ const OrderPlace = () => {
 	);
 		const handleDelete = (id) =>{
 			console.log(id);
-			fetch(`http://localhost:5000/spacificUSer/${id}`, {
+			fetch(`https://damp-dusk-75961.herokuapp.com/spacificUSer/${id}`, {
 				method:"DELETE",
 			}).then(res => res.json()).then(data => {
 				const deleteConfirmation = window.confirm('Are you sure to delete your ticket')
