@@ -1,10 +1,10 @@
 const firebaseConfig = {
-	apiKey: 'AIzaSyCoHt_F14q6jRq26nHZV2Qg5la87zlUQLY',
-	authDomain: 'travel-authentication-9b4da.firebaseapp.com',
-	projectId: 'travel-authentication-9b4da',
-	storageBucket: 'travel-authentication-9b4da.appspot.com',
-	messagingSenderId: '207973671818',
-	appId: '1:207973671818:web:7aabbcb429291d737ade73'
+	apiKey: 'AIzaSyB62A4pw7PYS4PWtzgkqggHdfhP6DOdjeA',
+	authDomain: 'bd-travel-a8f8d.firebaseapp.com',
+	projectId: 'bd-travel-a8f8d',
+	storageBucket: 'bd-travel-a8f8d.appspot.com',
+	messagingSenderId: '573059935400',
+	appId: '1:573059935400:web:db56dfb4acc3c9928f269d'
 };
 
 export default firebaseConfig;
