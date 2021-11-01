@@ -22,6 +22,7 @@ const Header = () => {
 					>
 						Home
 					</Nav.Link>
+
 					<Nav.Link
 						as={NavLink}
 						className="text-decoration-none mx-2 text-black"
@@ -31,31 +32,39 @@ const Header = () => {
 						}}
 						to="/orderPlace"
 					>
-						Order Place
+						Booked Tickets
 					</Nav.Link>
 
-					<Nav.Link
-						as={NavLink}
-						className="text-decoration-none mx-2 text-black"
-						activeStyle={{
-							fontWeight: 'bold',
-							color: 'tomato'
-						}}
-						to="/manageOrder"
-					>
-						Manage Order
-					</Nav.Link>
-					<Nav.Link
-						as={NavLink}
-						className="text-decoration-none mx-2 text-black"
-						activeStyle={{
-							fontWeight: 'bold',
-							color: 'tomato'
-						}}
-						to="/add"
-					>
-						Add Tour Spot
-					</Nav.Link>
+					{user.email ? (
+						<Nav.Link
+							as={NavLink}
+							className="text-decoration-none mx-2 text-black"
+							activeStyle={{
+								fontWeight: 'bold',
+								color: 'tomato'
+							}}
+							to="/manageOrder"
+						>
+							Manage All Tickets
+						</Nav.Link>
+					) : (
+						''
+					)}
+					{user.email ? (
+						<Nav.Link
+							as={NavLink}
+							className="text-decoration-none mx-2 text-black"
+							activeStyle={{
+								fontWeight: 'bold',
+								color: 'tomato'
+							}}
+							to="/add"
+						>
+							Add Tour Spot
+						</Nav.Link>
+					) : (
+						''
+					)}
 
 					{user.email ? (
 						<Navbar.Text>
