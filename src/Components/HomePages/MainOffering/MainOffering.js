@@ -19,14 +19,14 @@ const MainOffering = () => {
 				Offering ticket for <span className="text-success fst-italic"> BOOKING</span>
 			</h1>
 			{tours.length === 0 ? (
-				<div class="d-flex justify-content-center">
-					<div class="spinner-border" role="status">
-						<span class="visually-hidden">Loading...</span>
+				<div className="d-flex justify-content-center">
+					<div className="spinner-border" role="status">
+						<span className="visually-hidden">Loading...</span>
 					</div>
 				</div>
 			) : (
 				<div className="row row-cols-1 row-cols-md-3 g-4 my-2 mx-5">
-					{tours.map((selectItem) => <SelectItem select={selectItem} />)}
+					{tours.map((selectItem) => <SelectItem key={selectItem._id} select={selectItem} />)}
 				</div>
 			)}
 		</div>

@@ -24,17 +24,21 @@ const OrderPlace = () => {
 		]
 	);
 		const handleDelete = (id) =>{
-			console.log(id);
-			fetch(`https://damp-dusk-75961.herokuapp.com/spacificUSer/${id}`, {
+			// console.log(id);
+			const deleteConfirmation = window.confirm('Are you sure to delete your ticket')
+			if(deleteConfirmation){
+				fetch(`https://damp-dusk-75961.herokuapp.com/spacificUSer/${id}`, {
 				method:"DELETE",
 			}).then(res => res.json()).then(data => {
-				const deleteConfirmation = window.confirm('Are you sure to delete your ticket')
+				
 				if(data.deletedCount > 0){
 					alert("Deleted Successfully");
 					const remainingSpacificUser = spacificUser.filter(remaining => remaining._id !== id);
 					setSpacificUser(remainingSpacificUser)
 				}
 			})
+			}
+			
 		}
 	return (
 		<div className="text-center my-5 mx-3">
@@ -43,7 +47,7 @@ const OrderPlace = () => {
 			<Row className="mt-4 mx-3 text-start ">
 				{spacificUser?.map((bookingInfo) => (
 					
-						<Col xs={12} lg={3} className="border p-3 mx-2 booking-single-ticket">
+						<Col key={bookingInfo._id} xs={12} lg={3} className="border p-3 mx-2 booking-single-ticket">
 							<div>
 								<h5 className="text-start">Booked {bookingInfo?.titleName} Ticket</h5>
 								<p>Your email : {bookingInfo?.email}</p>

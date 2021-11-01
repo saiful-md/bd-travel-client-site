@@ -19,8 +19,7 @@ const Login = () => {
 			setUser(result.user);
 			history.push(url)
 
-		})
-		.catch((error) => console.log(error.message))
+		}).finally(() => setIsLoading(false))
 	};
 		
 	

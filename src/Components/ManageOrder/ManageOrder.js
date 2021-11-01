@@ -15,27 +15,27 @@ const ManageOrder = () => {
 
 	const handleDelete = (id) => {
 		// console.log(id);
-		fetch(`https://damp-dusk-75961.herokuapp.com/spacificUSer/${id}`, {
-			method: 'DELETE'
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				const deleteCoirmation = window.confirm('Are you sure to delete the ticket');
-				if (deleteCoirmation) {
+		const deleteCoirmation = window.confirm('Are you sure to delete the ticket');
+		if (deleteCoirmation) {
+			fetch(`https://damp-dusk-75961.herokuapp.com/spacificUSer/${id}`, {
+				method: 'DELETE'
+			})
+				.then((res) => res.json())
+				.then((data) => {
 					alert('Deleted Successfully');
 					const remainingSpacificUser = manageOrder.filter((remaining) => remaining._id !== id);
 					setManageOrder(remainingSpacificUser);
-				}
-			});
+				});
+		}
 	};
 
 	return (
 		<div className="m-5">
 			<h1>Manage all Booking Ticket user</h1>
 			{manageOrder.length === 0 ? (
-				<div class="d-flex justify-content-center">
-					<div class="spinner-border" role="status">
-						<span class="visually-hidden">Loading...</span>
+				<div className="d-flex justify-content-center">
+					<div className="spinner-border" role="status">
+						<span className="visually-hidden">Loading...</span>
 					</div>
 				</div>
 			) : (
