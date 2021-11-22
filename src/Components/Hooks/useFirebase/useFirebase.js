@@ -12,6 +12,8 @@ const useFirebase = () => {
 		error,
 		setError
 	] = useState('');
+
+	// console.log(user.email);
 	const [
 		isLoading,
 		setIsLoading
@@ -41,7 +43,6 @@ const useFirebase = () => {
 
 	return {
 		user,
-
 		error,
 		isLoading,
 		setUser,

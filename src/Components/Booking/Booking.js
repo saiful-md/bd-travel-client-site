@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router';
+import useAuth from '../Hooks/useAuth/useAuth';
 
 const Booking = () => {
 	const { id } = useParams();
-	console.log(id);
+	const { user } = useAuth();
 
 	const [
 		bookedSpot,
@@ -24,7 +25,6 @@ const Booking = () => {
 
 	const { register, handleSubmit, reset } = useForm();
 	const onSubmit = (data) => {
-		console.log(data);
 		fetch('https://damp-dusk-75961.herokuapp.com/spacificUser', {
 			method: 'POST',
 			headers: {
@@ -34,7 +34,6 @@ const Booking = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
 				if (data) {
 					alert('Booked successfully!');
 				}
@@ -64,7 +63,7 @@ const Booking = () => {
 								placeholder="User name"
 							/>
 							<br />
-							<input className="w-50 p-1" {...register('email')} placeholder="Email address" /> <br />
+							<input className="w-50 p-1" {...register('email')} value={user.email} /> <br />
 							<input className="w-50 mt-4 p-1" {...register('titleName')} placeholder="Title Name" />{' '}
 							<br />
 							<input className="w-50 mt-4 p-1" {...register('address')} placeholder="Address" /> <br />

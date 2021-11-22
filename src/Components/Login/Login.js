@@ -10,12 +10,12 @@ const Login = () => {
 	let location = useLocation();
 	let history = useHistory();
 	const url = location.state?.from || '/home';
-	console.log(history, url)
+	// console.log(history, url)
 
 	const handleGoogleSignIn = () =>{
 		googleSingIn()
 		.then((result) => {
-			console.log(result)
+			// console.log(result)
 			setUser(result.user);
 			history.push(url)
 
