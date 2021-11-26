@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { useParams } from 'react-router';
 import useAuth from '../Hooks/useAuth/useAuth';
 import './OrderPlace.css'
 
@@ -41,27 +40,29 @@ const OrderPlace = () => {
 			
 		}
 	return (
-		<div className="text-center my-5 mx-3">
+		<div className="text-center my-5 mx-3 w-100">
 			<h1>this is order place. </h1>
 			<h4>You Booked {spacificUser?.length} Ticket </h4>
-			<Row className="mt-4 mx-3 text-start ">
-				{spacificUser?.map((bookingInfo) => (
-					
-						<Col key={bookingInfo._id} xs={12} lg={3} className="border p-3 mx-2 booking-single-ticket">
-							<div>
-								<h5 className="text-start">Booked {bookingInfo?.titleName} Ticket</h5>
-								<p>Your email : {bookingInfo?.email}</p>
-								<address>Address: {bookingInfo?.address}</address>
-								<p>{bookingInfo?.description}</p>
-								<p>Phone number: {bookingInfo?.PhoneNumber}</p>
-								<button onClick={()=>handleDelete(bookingInfo?._id)}  className="btn btn-danger">Delete</button>
-							</div>
-							
-						</Col>
-					
-				))}
-			</Row>
-		</div>
+			
+				<Row style={{display: 'flex', justifyContent: 'center'}} className="m-4  text-start  ">
+					{spacificUser?.map((bookingInfo) => (
+						
+							<Col key={bookingInfo._id} xs={12} lg={3} className="border p-3 m-2 booking-single-ticket">
+								<div>
+									<h5 className="text-start">Booked {bookingInfo?.titleName} Ticket</h5>
+									<p>Your email : {bookingInfo?.email}</p>
+									<address>Address: {bookingInfo?.address}</address>
+									<p>{bookingInfo?.description}</p>
+									<p>Phone number: {bookingInfo?.PhoneNumber}</p>
+									<button onClick={()=>handleDelete(bookingInfo?._id)}  className="btn btn-danger">Delete</button>
+								</div>
+								
+							</Col>
+						
+					))}
+				</Row>
+			</div>
+	
 	);
 };
 

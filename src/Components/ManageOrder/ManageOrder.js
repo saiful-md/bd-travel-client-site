@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, ToggleButtonGroup } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 const ManageOrder = () => {
 	const [
@@ -14,7 +14,6 @@ const ManageOrder = () => {
 	}, []);
 
 	const handleDelete = (id) => {
-		// console.log(id);
 		const deleteCoirmation = window.confirm('Are you sure to delete the ticket');
 		if (deleteCoirmation) {
 			fetch(`https://damp-dusk-75961.herokuapp.com/spacificUSer/${id}`, {
@@ -46,6 +45,7 @@ const ManageOrder = () => {
 							<th>Email</th>
 							<th>Booking Title</th>
 							<th>Booking Delete</th>
+							<th>Booking Approved</th>
 						</tr>
 					</thead>
 
@@ -59,6 +59,12 @@ const ManageOrder = () => {
 									<button onClick={() => handleDelete(user._id)} className="btn btn-danger mb-3">
 										DELETE
 									</button>
+								</td>
+								<td>
+									<select>
+										<option value="pending">PENDING</option>
+										<option value="approved">APPROVED</option>
+									</select>
 								</td>
 							</tr>
 						))}
